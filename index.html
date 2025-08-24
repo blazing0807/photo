@@ -1,0 +1,274 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hey, can I get a cute pic? 💖</title>
+    <meta name="description"
+        content="A sweet, aesthetic page to ask your girlfriend for a cute photo. One-tap WhatsApp button included." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
+    <style>
+        :root {
+            --bg1: #fdf1f7;
+            --bg2: #ffe4f1;
+            --bg3: #f6f3ff;
+            --card: #ffffff;
+            --ink: #2a2233;
+            --ink-soft: #645c6b;
+            --accent: #ff4da6;
+            --accent-2: #8a5cff;
+            --glow: 0 20px 80px rgba(255, 77, 166, .35), 0 4px 16px rgba(138, 92, 255, .25);
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: Poppins, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+            color: var(--ink);
+            background: radial-gradient(1200px 600px at 10% 10%, var(--bg3), transparent),
+                radial-gradient(900px 700px at 90% 0%, var(--bg2), transparent),
+                radial-gradient(1000px 800px at 50% 100%, var(--bg1), transparent),
+                linear-gradient(135deg, #fff 0%, #fff 100%);
+            overflow-x: hidden;
+        }
+
+        .floaty {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 18px;
+            opacity: .18;
+            animation: drift linear forwards;
+        }
+
+        @keyframes drift {
+            0% {
+                transform: translateY(110vh) translateX(0) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-10vh) translateX(var(--x)) rotate(360deg);
+            }
+        }
+
+        .wrap {
+            min-height: 100%;
+            display: grid;
+            place-items: center;
+            padding: 24px
+        }
+
+        .card {
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+            width: 100%;
+            background: var(--card);
+            border-radius: 28px;
+            box-shadow: var(--glow);
+            border: 1px solid rgba(0, 0, 0, .04);
+            padding: clamp(20px, 5vw, 42px);
+            backdrop-filter: blur(6px) saturate(1.2);
+        }
+
+        .ribbon {
+            position: absolute;
+            inset: auto 24px -18px auto;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            color: white;
+            padding: 8px 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 12px;
+            box-shadow: 0 8px 22px rgba(255, 77, 166, .35);
+        }
+
+        h1 {
+            font-size: clamp(28px, 4vw, 44px);
+            line-height: 1.12;
+            margin: 0 0 14px 0;
+        }
+
+        .sub {
+            color: var(--ink-soft);
+            font-size: clamp(14px, 2.2vw, 18px);
+            line-height: 1.6;
+            margin-bottom: 24px
+        }
+
+        .cta {
+            --shadow: 0 10px 30px rgba(255, 77, 166, .35), 0 8px 24px rgba(138, 92, 255, .25);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            outline: none;
+            text-decoration: none;
+            cursor: pointer;
+            padding: 16px 22px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: .2px;
+            color: white;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            box-shadow: var(--shadow);
+            transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
+        }
+
+        .cta:hover {
+            transform: translateY(-2px) scale(1.01);
+            filter: saturate(1.1);
+        }
+
+        .cta:active {
+            transform: translateY(0) scale(.99);
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px
+        }
+
+        .chip {
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: #f6f0ff;
+            color: #6b5ce6;
+            font-weight: 600;
+            font-size: 12px;
+            border: 1px solid #e9e3ff
+        }
+
+        footer {
+            margin-top: 24px;
+            color: var(--ink-soft);
+            font-size: 12px
+        }
+
+        .sticker {
+            position: absolute;
+            right: -12px;
+            top: -12px;
+            transform: rotate(8deg);
+            background: #fff;
+            border-radius: 18px;
+            padding: 10px 14px;
+            font-weight: 700;
+            font-size: 13px;
+            box-shadow: 0 10px 26px rgba(0, 0, 0, .08)
+        }
+
+        .burst {
+            position: fixed;
+            pointer-events: none;
+            font-size: 18px;
+            animation: pop .8s ease-out forwards
+        }
+
+        @keyframes pop {
+            0% {
+                transform: translate(-50%, -50%) scale(.6);
+                opacity: 1
+            }
+
+            100% {
+                transform: translate(-50%, -120%) scale(1.6);
+                opacity: 0
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="floaty" aria-hidden="true" id="floaty"></div>
+    <main class="wrap">
+        <section class="card">
+            <span class="sticker">✨ you = cutest</span>
+            <span class="ribbon">special request</span>
+            <div>
+                <h1>Hey love, can I get<br />a <span
+                        style="background:linear-gradient(90deg,var(--accent),var(--accent-2)); -webkit-background-clip:text; background-clip:text; color:transparent">super
+                        cute photo</span> of you? 🫶</h1>
+                <p class="sub">Just one little snap to brighten my day. No pressure—messy hair, cozy PJs, sleepy smile…
+                    all perfect to me. 💞</p>
+                <a class="cta"
+                    href="https://wa.me/916289232624?text=Sure%20love!%20Sending%20a%20cute%20pic%20now%20%F0%9F%98%8D"
+                    target="_blank" rel="noopener" aria-label="Open WhatsApp to send a cute photo">
+                    <span>Sure</span> 📸
+                </a>
+                <a class="cta"
+                    href="https://wa.me/916289232624?text=Sure%20love!%20Sending%20a%20cute%20pic%20now%20%F0%9F%98%8D"
+                    target="_blank" rel="noopener" aria-label="Open WhatsApp to send a cute photo">
+                    <span>May be Later</span>
+                </a>
+
+                <div class="chips" aria-hidden="true">
+                    <span class="chip">no filters needed</span>
+                    <span class="chip">your smile = magic</span>
+                    <span class="chip">one tap, that’s it</span>
+                </div>
+
+                <footer>Made with ♥ just for you.</footer>
+            </div>
+        </section>
+
+    </main>
+    <script>
+        const floaty = document.getElementById('floaty');
+        const HEARTS = 40;
+        const EMOJIS = ['💖', '💘', '💞', '💗', '💓', '💝', '💕'];
+        for (let i = 0; i < HEARTS; i++) {
+            const h = document.createElement('div');
+            h.className = 'heart';
+            h.textContent = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.animationDuration = 10 + Math.random() * 20 + 's';
+            h.style.animationDelay = Math.random() * -20 + 's';
+            h.style.setProperty('--x', (Math.random() * 60 - 30) + 'vw');
+            floaty.appendChild(h);
+        }
+
+        function burst(x, y) {
+            for (let i = 0; i < 9; i++) {
+                const b = document.createElement('div');
+                b.className = 'burst';
+                b.textContent = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
+                b.style.left = x + 'px'; b.style.top = y + 'px';
+                b.style.transform = translate(-50 %, -50 %) rotate(${ Math.random() * 360 }deg);
+                b.style.fontSize = (16 + Math.random() * 12) + 'px';
+                document.body.appendChild(b);
+                setTimeout(() => b.remove(), 800);
+            }
+        }
+
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('a')) return;
+            burst(e.clientX, e.clientY);
+        });
+    </script>
+</body>
+
+</html>
